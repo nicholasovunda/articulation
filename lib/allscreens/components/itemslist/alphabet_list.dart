@@ -1,5 +1,4 @@
-
-Map dictionary = <String, dynamic> {
+Map dictionary = <String, dynamic>{
   "b": {
     "initial": [
       "Baby",
@@ -255,8 +254,8 @@ Map dictionary = <String, dynamic> {
       "Judge",
       "Badge",
       "Bridge",
-      "Storage"
-          "Village",
+      "Storage",
+      "Village",
       "Package",
       "Bandage",
     ]
@@ -552,8 +551,8 @@ Map dictionary = <String, dynamic> {
   "sh": {
     "initial": [
       "Shoes",
-      "Shout,"
-          "Shy",
+      "Shout,",
+      "Shy",
       "Shiny",
       "Shopping",
       "Sugar",
@@ -564,8 +563,8 @@ Map dictionary = <String, dynamic> {
     ],
     "median": [
       "Cushions",
-      "Rushing"
-          "Push Up",
+      "Rushing",
+      "Push Up",
       "Dishes",
       "Handshake",
       "windshield",

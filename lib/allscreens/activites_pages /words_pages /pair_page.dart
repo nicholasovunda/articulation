@@ -126,10 +126,10 @@ class _PairPageState extends State<PairPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
-                            audioCache: audioCache,thesize: true,
+                            audioCache: audioCache,thesize: true,index: pageNum,
                           ),
                           ImageContainer(
-                            audioCache: audioCache, thesize: true,
+                            audioCache: audioCache, thesize: true,index: pageNum,
                           ),
                         ],
                       ),
@@ -281,7 +281,7 @@ class _PairPageState extends State<PairPage> {
                           ),
                           Text(
                            "play",
-                            style: const TextStyle(
+                            style:  TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
                           )

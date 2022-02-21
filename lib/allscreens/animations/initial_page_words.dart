@@ -2,7 +2,7 @@ import 'package:articulation_studio/allscreens/animations/sound_location.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-
+//TODO dispose all animations
 
 class AnimatedDirection extends StatefulWidget {
   final String? text;

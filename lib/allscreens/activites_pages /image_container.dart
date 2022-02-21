@@ -6,9 +6,11 @@ import 'package:provider/provider.dart';
 import '../../provider/alphabet_provider.dart';
 
 class ImageContainer extends StatefulWidget {
+  int index;
   bool thesize;
   ImageContainer({
     required this.thesize,
+    required this.index,
     Key? key,
     required this.audioCache,
   }) : super(key: key);
@@ -33,9 +35,7 @@ class _ImageContainerState extends State<ImageContainer> {
         const SizedBox(
           height: 10.0,
         ),
-        Text(dictionary[Provider.of<AlphabetProvider>(context).word]
-                [Provider.of<PositionProvider>(context).position][0]
-            .toString()),
+        Text(dictionary[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][widget.index].toString()),
       ],
     );
   }
@@ -56,8 +56,13 @@ class GestureImage extends StatefulWidget {
 }
 
 class _GestureImageState extends State<GestureImage> {
+
   @override
   Widget build(BuildContext context) {
+    String thetext = dictionary[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][0].toString();
+    var thelocal = Provider.of<AlphabetProvider>(context).word;
+    var theposition = Provider.of<PositionProvider>(context).position;
+    var path = "images/""${thelocal.toString()}""/""${theposition.toString()}""/""$thetext"".png";
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: GestureDetector(
@@ -77,14 +82,16 @@ class _GestureImageState extends State<GestureImage> {
           height: widget.size == true
               ? MediaQuery.of(context).size.height * 0.2
               : MediaQuery.of(context).size.height * 0.3,
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage("images/b/initial/baby.png"),
-              fit: BoxFit.cover,
-            ),
-          ),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage(
+              // passing index of image to the image container being view by rhe user from dictionary and image file
+                "$path"),
+            fit: BoxFit.cover,
+          )),
         ),
       ),
     );
   }
 }
+

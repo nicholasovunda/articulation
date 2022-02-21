@@ -16,7 +16,8 @@ class _CardsPageState extends State<CardsPage> {
   AudioCache audioCache = AudioCache();
 // late PageController _pageController;
 
-
+  PageController pageController = PageController();
+  int pageNum = 0;
   @override
   Widget build(BuildContext context) {
     Map? newLow =
@@ -103,7 +104,12 @@ class _CardsPageState extends State<CardsPage> {
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.51,
                 child: PageView.builder(
-                  // controller: _pageController,
+                  controller: pageController,
+                  onPageChanged: (num){
+                    setState(() {
+                      pageNum = num;
+                    });
+                  },
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     extraindex += 2;
@@ -120,7 +126,7 @@ class _CardsPageState extends State<CardsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
-                            audioCache: audioCache, thesize: false,
+                            audioCache: audioCache, thesize: false,index: pageNum,
                           ),
 
                         ],
