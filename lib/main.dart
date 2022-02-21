@@ -22,6 +22,7 @@ void main() {
   ),
   );
 }
+// TODO disposee animations and frame rate at thee start of the project
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);

@@ -29,6 +29,7 @@ class _ImageContainerState extends State<ImageContainer> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureImage(
+          index: widget.index,
           audioCache: widget.audioCache,
           size: widget.thesize,
         ),
@@ -43,7 +44,9 @@ class _ImageContainerState extends State<ImageContainer> {
 
 class GestureImage extends StatefulWidget {
   final bool size;
+  final int index;
   const GestureImage({
+    required this.index,
     required this.size,
     Key? key,
     required this.audioCache,
@@ -59,7 +62,7 @@ class _GestureImageState extends State<GestureImage> {
 
   @override
   Widget build(BuildContext context) {
-    String thetext = dictionary[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][0].toString();
+    String thetext = dictionary[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][widget.index].toString();
     var thelocal = Provider.of<AlphabetProvider>(context).word;
     var theposition = Provider.of<PositionProvider>(context).position;
     var path = "images/""${thelocal.toString()}""/""${theposition.toString()}""/""$thetext"".png";
@@ -82,14 +85,8 @@ class _GestureImageState extends State<GestureImage> {
           height: widget.size == true
               ? MediaQuery.of(context).size.height * 0.2
               : MediaQuery.of(context).size.height * 0.3,
-          decoration: BoxDecoration(
-              image: DecorationImage(
-            image: AssetImage(
-              // passing index of image to the image container being view by rhe user from dictionary and image file
-                "$path"),
-            fit: BoxFit.cover,
-          )),
-        ),
+          child:Image.asset("$path",fit: BoxFit.cover,),
+          ),
       ),
     );
   }

@@ -4,27 +4,43 @@ import 'package:provider/provider.dart';
 import '../../../provider/alphabet_provider.dart';
 import '../../components/itemslist/alphabet_list.dart';
 import '../image_container.dart';
+import 'dart:math';
 
 class PairPage extends StatefulWidget {
-
   const PairPage({Key? key}) : super(key: key);
 
   @override
   _PairPageState createState() => _PairPageState();
 }
 
-class _PairPageState extends State<PairPage> {
+class _PairPageState extends State<PairPage> with AutomaticKeepAliveClientMixin <PairPage>{
   AudioPlayer audioPlayer = AudioPlayer();
   AudioCache audioCache = AudioCache();
- PageController pageController = PageController();
- int pageNum = 0;
+  late PageController _pageController;
+  @override
+  bool get wantKeepAlive => true;
+@override
+void initState(){
+  _pageController =  PageController(initialPage: pageNum);
+  super.initState();
+}
+@override
+void dispose(){
+  _pageController.dispose();
+  super.dispose();
+}
+
+  int pageNum = 0;
+  int imageIndex = 0;
+
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     Map? newLow =
         Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
     List newvalue = newLow["initial"];
-     double itemCount = newvalue.length / 2 + 1;
-     int itemCountInt = newvalue.length % 2;
+    double itemCount = newvalue.length / 2 + 1;
+    int itemCountInt = newvalue.length % 2;
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
@@ -85,11 +101,13 @@ class _PairPageState extends State<PairPage> {
                     children: const [
                       Text(
                         "0/0",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         "0%",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
@@ -104,11 +122,12 @@ class _PairPageState extends State<PairPage> {
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.51,
                 child: PageView.builder(
-                  controller: pageController,
-                  onPageChanged: (num){
+                  controller: _pageController,
+                  onPageChanged: (num) {
                     setState(() {
                       pageNum = num;
-
+                      imageIndex = pageNum * 2 +1;
+                      // pow(pageNum, 2).toInt() + 1
                     });
                   },
                   scrollDirection: Axis.horizontal,
@@ -126,16 +145,22 @@ class _PairPageState extends State<PairPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
-                            audioCache: audioCache,thesize: true,index: pageNum,
+                            audioCache: audioCache,
+                            thesize: true,
+                            index: pageNum * 2,
                           ),
                           ImageContainer(
-                            audioCache: audioCache, thesize: true,index: pageNum,
+                            audioCache: audioCache,
+                            thesize: true,
+                            index: imageIndex == 0 ? pageNum +1 : imageIndex,
                           ),
                         ],
                       ),
                     );
                   },
-                  itemCount: newvalue.length / 2 == 0 ? itemCountInt : itemCount.toInt(),
+                  itemCount: newvalue.length / 2 == 0
+                      ? itemCountInt
+                      : itemCount.toInt(),
                 ),
               ),
             ),
@@ -199,7 +224,9 @@ class _PairPageState extends State<PairPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 35.0,),
+            const SizedBox(
+              height: 35.0,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -257,10 +284,14 @@ class _PairPageState extends State<PairPage> {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 10,),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     TextButton(
                       style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 20,),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
                           backgroundColor: Colors.black12,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
@@ -271,17 +302,17 @@ class _PairPageState extends State<PairPage> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: const [
-                         Icon(
+                          Icon(
                             Icons.play_arrow,
                             color: Colors.white,
                             size: 25,
                           ),
-                           SizedBox(
+                          SizedBox(
                             width: 1,
                           ),
                           Text(
-                           "play",
-                            style:  TextStyle(
+                            "play",
+                            style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
                           )
@@ -317,5 +348,3 @@ class _PairPageState extends State<PairPage> {
     );
   }
 }
-
-
