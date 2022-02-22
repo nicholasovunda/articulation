@@ -10,6 +10,7 @@ import 'package:articulation_studio/provider/alphabet_provider.dart';
 // we have the showmodalwidget(slideuppanel) for navigating to a particular section of the app based on the sound, and the values are,
 // are passed down from the parent widget(this.container) it takes  an argument when called and passes down the value through the widget from the animated container
 // to the slideuppanel.
+// the sentence, phrase and word home navigation route is here
 class AnimationContainerWidget extends StatefulWidget {
   final String text;
   final String subText;

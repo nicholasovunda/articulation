@@ -7,17 +7,18 @@ import 'package:google_fonts/google_fonts.dart';
 class AnimatedDirection extends StatefulWidget {
   final String? text;
   final String? subtext;
+  final String? theTextsub;
   final Color theColor;
   final IconData theIcon;
   final String theText;
   const AnimatedDirection(
-      {
-        this.subtext,
-        this.text,
-        required this.theColor,
-        required this.theIcon,
-        required this.theText,
-        Key? key})
+      {this.theTextsub,
+      this.subtext,
+      this.text,
+      required this.theColor,
+      required this.theIcon,
+      required this.theText,
+      Key? key})
       : super(key: key);
 
   @override
@@ -37,8 +38,7 @@ class _AnimatedDirectionState extends State<AnimatedDirection> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      GestureDetector(
+  Widget build(BuildContext context) => GestureDetector(
         onTap: () {
           updateRadius();
           showModalBottomSheet(
@@ -54,25 +54,26 @@ class _AnimatedDirectionState extends State<AnimatedDirection> {
         child: AnimatedContainer(
           child: Center(
             child: Padding(
-              padding: EdgeInsets.all(MediaQuery
-                  .of(context)
-                  .size
-                  .width * 0.08),
+              padding: EdgeInsets.all(MediaQuery.of(context).size.width * 0.04),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Icon(widget.theIcon, size: 50, color: Colors.white70),
-                  SizedBox(height: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.01),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.01),
                   Text(
                     widget.theText,
                     style: GoogleFonts.quicksand(
                         fontSize: 20,
                         fontWeight: FontWeight.w900,
                         color: Colors.white),
+                  ),
+                  Text(
+                    widget.theTextsub ?? "",
+                    style: GoogleFonts.quicksand(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black26),
                   )
                 ],
               ),
@@ -91,33 +92,39 @@ class _AnimatedDirectionState extends State<AnimatedDirection> {
           curve: Curves.easeOutBack,
           height: circleHeight,
           width: circleWidth,
-          onEnd: () =>
-              setState(() {
-                circleHeight = 160;
-                circleWidth = 160;
-              }),
+          onEnd: () => setState(() {
+            circleHeight = 160;
+            circleWidth = 160;
+          }),
         ),
       );
   Widget makeDismissible({required Widget child}) => GestureDetector(
-    behavior: HitTestBehavior.opaque,
-    onTap: () => Navigator.of(context).pop(),
-    child: GestureDetector(
-      onTap: () {},
-      child: child,
-    ),
-  );
+        behavior: HitTestBehavior.opaque,
+        onTap: () => Navigator.of(context).pop(),
+        child: GestureDetector(
+          onTap: () {},
+          child: child,
+        ),
+      );
   Widget buildSheet({required text, required subtext}) => makeDismissible(
-    child: DraggableScrollableSheet(
-      maxChildSize: 0.8,
-      initialChildSize: 0.8,
-      minChildSize: 0.7,
-      builder: (_, controller) => Container(
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.vertical(top: Radius.circular(15))),
-        padding: const EdgeInsets.all(20),
-        child: SoundLocation(controller: controller,text: text,subtext: subtext,theText: widget.theText,)
-      ),
-    ),
-  );
+        child: DraggableScrollableSheet(
+          maxChildSize: 0.8,
+          initialChildSize: 0.8,
+          minChildSize: 0.7,
+          builder: (_, controller) => Container(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(15),
+                ),
+              ),
+              padding: const EdgeInsets.all(20),
+              child: SoundLocation(
+                controller: controller,
+                text: text,
+                subtext: subtext,
+                theText: widget.theText,
+              )),
+        ),
+      );
 }

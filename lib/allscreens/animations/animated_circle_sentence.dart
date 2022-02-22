@@ -165,8 +165,9 @@ class _AnimatedCircleSentenceState extends State<AnimatedCircleSentence> {
               children: [
                 AnimatedDirection(
                   theColor: widget.theColor,
-                  theIcon: Icons.spa_outlined,
-                  theText: "Rotating",
+                  theIcon: Icons.autorenew,
+                  theText: "Rolling",
+                  theTextsub: "Fixed",
                   text: widget.text,
                   subtext: widget.subtext,
                 ),
@@ -175,8 +176,9 @@ class _AnimatedCircleSentenceState extends State<AnimatedCircleSentence> {
                 ),
                 AnimatedDirection(
                   theColor: widget.theColor,
-                  theText: "Rotating",
-                  theIcon: Icons.light,
+                  theText: "Rotate",
+                  theTextsub: "Mixed",
+                  theIcon: Icons.autorenew,
                   text: widget.text,
                   subtext: widget.subtext,
                 ),
@@ -186,7 +188,7 @@ class _AnimatedCircleSentenceState extends State<AnimatedCircleSentence> {
                 AnimatedDirection(
                     theColor:  widget.theColor,
                     theIcon: Icons.emoji_nature_outlined,
-                    theText: "Unique",
+                    theText: "Unique S",
                 text: widget.text,
                 subtext: widget.subtext,),
               ],
