@@ -1,27 +1,30 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../components/itemslist/alphabet_list.dart';
+
 import '../../../provider/alphabet_provider.dart';
+import '../../components/itemslist/alphabet_list.dart';
 import '../image_container.dart';
 
-class UniqueSentence extends StatefulWidget {
-  const UniqueSentence({Key? key}) : super(key: key);
+class UniquePageSentence extends StatefulWidget {
+  const UniquePageSentence ({Key? key}) : super(key: key);
 
   @override
-  _UniqueSentenceState createState() => _UniqueSentenceState();
+  _UniquePageSentence  createState() => _UniquePageSentence ();
 }
 
-class _UniqueSentenceState extends State<UniqueSentence> {
+class _UniquePageSentence  extends State<UniquePageSentence > {
   AudioPlayer audioPlayer = AudioPlayer();
   AudioCache audioCache = AudioCache();
 // late PageController _pageController;
+
+  PageController pageController = PageController();
+  int pageNum = 0;
   @override
   Widget build(BuildContext context) {
     Map? newLow =
     Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
     List newvalue = newLow[Provider.of<PositionProvider>(context).position];
-
     int extraindex = -2;
     return Material(
       child: Container(
@@ -83,11 +86,13 @@ class _UniqueSentenceState extends State<UniqueSentence> {
                     children: const [
                       Text(
                         "0/0",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         "0%",
-                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(
+                            fontSize: 12, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
@@ -101,26 +106,38 @@ class _UniqueSentenceState extends State<UniqueSentence> {
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.51,
-                child: Container(
-                  margin: const EdgeInsets.all(5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.white,
-                  ),
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  // width: MediaQuery.of(context).size.width * 0.9,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ImageContainer(
-                        audioCache: audioCache, thesize: true ,index: 1,
+                child: PageView.builder(
+                  controller: pageController,
+                  onPageChanged: (num) {
+                    setState(() {
+                      pageNum = num;
+                    });
+                  },
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) {
+                    extraindex += 2;
+                    return Container(
+                      margin: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.white,
                       ),
-                      ImageContainer(
-                        audioCache: audioCache, thesize: true ,index: 1,
+                      height: MediaQuery.of(context).size.height * 0.3,
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ImageContainer(
+                            audioCache: audioCache,
+                            thesize: false,
+                            index: pageNum,
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                    );
+                  },
+                  itemCount: newvalue.length,
                 ),
               ),
             ),
@@ -184,7 +201,9 @@ class _UniqueSentenceState extends State<UniqueSentence> {
                 ),
               ],
             ),
-            const SizedBox(height: 35.0,),
+            const SizedBox(
+              height: 35.0,
+            ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -242,10 +261,14 @@ class _UniqueSentenceState extends State<UniqueSentence> {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 10,),
+                    const SizedBox(
+                      width: 10,
+                    ),
                     TextButton(
                       style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(horizontal: 20,),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 20,
+                          ),
                           backgroundColor: Colors.black12,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
@@ -302,4 +325,3 @@ class _UniqueSentenceState extends State<UniqueSentence> {
     );
   }
 }
-

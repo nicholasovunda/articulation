@@ -1,4 +1,4 @@
-Map dictionary = <String, dynamic>{
+Map dictionarySentence = <String, dynamic>{
   "b": {
     "initial": [
       "Baby",
