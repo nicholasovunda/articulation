@@ -70,6 +70,7 @@ class _GestureImageState extends State<GestureImage> {
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: GestureDetector(
         onTap: () async {
+          print(path);
           await widget.audioCache.play("pie.mp4");
         },
         child: Container(
@@ -85,7 +86,7 @@ class _GestureImageState extends State<GestureImage> {
           height: widget.size == true
               ? MediaQuery.of(context).size.height * 0.2
               : MediaQuery.of(context).size.height * 0.3,
-          child:Image.asset("$path",fit: BoxFit.cover,),
+          child:Image.asset(path,fit: BoxFit.cover,),
           ),
       ),
     );

@@ -73,9 +73,10 @@ flutter:
   assets:
     - assets/
     - images/
+    - images/b/final/
     - images/b/initial/
     - images/b/median/
-    - images/b/final/
+
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

@@ -1,45 +1,28 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../provider/alphabet_provider.dart';
 import '../../components/itemslist/alphabet_list.dart';
+import '../../../provider/alphabet_provider.dart';
 import '../image_container.dart';
 
-class PairPage extends StatefulWidget {
-  const PairPage({Key? key}) : super(key: key);
+class UniqueSentence extends StatefulWidget {
+  const UniqueSentence({Key? key}) : super(key: key);
 
   @override
-  _PairPageState createState() => _PairPageState();
+  _UniqueSentenceState createState() => _UniqueSentenceState();
 }
 
-class _PairPageState extends State<PairPage> with AutomaticKeepAliveClientMixin <PairPage>{
+class _UniqueSentenceState extends State<UniqueSentence> {
   AudioPlayer audioPlayer = AudioPlayer();
   AudioCache audioCache = AudioCache();
-  late PageController _pageController;
-  @override
-  bool get wantKeepAlive => true;
-@override
-void initState(){
-  _pageController =  PageController(initialPage: pageNum);
-  super.initState();
-}
-@override
-void dispose(){
-  _pageController.dispose();
-  super.dispose();
-}
-
-  int pageNum = 0;
-  int imageIndex = 0;
-
+// late PageController _pageController;
   @override
   Widget build(BuildContext context) {
-    super.build(context);
     Map? newLow =
-        Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
-    List newvalue = newLow["initial"];
-    double itemCount = newvalue.length / 2 + 1;
-    int itemCountInt = newvalue.length % 2;
+    Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
+    List newvalue = newLow[Provider.of<PositionProvider>(context).position];
+
+    int extraindex = -2;
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
@@ -100,13 +83,11 @@ void dispose(){
                     children: const [
                       Text(
                         "0/0",
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                       ),
                       Text(
                         "0%",
-                        style: TextStyle(
-                            fontSize: 12, fontWeight: FontWeight.w600),
+                        style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
                       )
                     ],
                   ),
@@ -120,46 +101,26 @@ void dispose(){
               padding: const EdgeInsets.symmetric(horizontal: 4.0),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.51,
-                child: PageView.builder(
-                  controller: _pageController,
-                  onPageChanged: (num) {
-                    setState(() {
-                      pageNum = num;
-                      imageIndex = pageNum * 2 +1;
-                      // pow(pageNum, 2).toInt() + 1
-                    });
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.white,
+                child: Container(
+                  margin: const EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  // width: MediaQuery.of(context).size.width * 0.9,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ImageContainer(
+                        audioCache: audioCache, thesize: true ,index: 1,
                       ),
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      // width: MediaQuery.of(context).size.width * 0.9,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ImageContainer(
-                            audioCache: audioCache,
-                            thesize: true,
-                            index: pageNum * 2,
-                          ),
-                          ImageContainer(
-                            audioCache: audioCache,
-                            thesize: true,
-                            index: imageIndex == 0 ? pageNum +1 : imageIndex,
-                          ),
-                        ],
+                      ImageContainer(
+                        audioCache: audioCache, thesize: true ,index: 1,
                       ),
-                    );
-                  },
-                  itemCount: newvalue.length / 2 == 0
-                      ? itemCountInt
-                      : itemCount.toInt(),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -223,9 +184,7 @@ void dispose(){
                 ),
               ],
             ),
-            const SizedBox(
-              height: 35.0,
-            ),
+            const SizedBox(height: 35.0,),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -283,14 +242,10 @@ void dispose(){
                         ],
                       ),
                     ),
-                    const SizedBox(
-                      width: 10,
-                    ),
+                    const SizedBox(width: 10,),
                     TextButton(
                       style: TextButton.styleFrom(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 20,),
                           backgroundColor: Colors.black12,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50))),
@@ -310,7 +265,7 @@ void dispose(){
                             width: 1,
                           ),
                           Text(
-                            "play",
+                            "Play",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
@@ -347,3 +302,4 @@ void dispose(){
     );
   }
 }
+

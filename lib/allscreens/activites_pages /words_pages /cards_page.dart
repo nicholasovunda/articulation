@@ -22,7 +22,7 @@ class _CardsPageState extends State<CardsPage> {
   Widget build(BuildContext context) {
     Map? newLow =
     Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
-    List newvalue = newLow["initial"];
+    List newvalue = newLow[Provider.of<PositionProvider>(context).position];
 
     int extraindex = -2;
     return Material(
