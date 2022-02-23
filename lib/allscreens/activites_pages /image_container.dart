@@ -66,11 +66,11 @@ class _GestureImageState extends State<GestureImage> {
     var thelocal = Provider.of<AlphabetProvider>(context).word;
     var theposition = Provider.of<PositionProvider>(context).position;
     var path = "images/""${thelocal.toString()}""/""${theposition.toString()}""/""$thetext"".png";
+    var path2 = "images/""${thelocal.toString()}""/""${theposition.toString()}""/""$thetext"".jpg";
     return Container(
       decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
       child: GestureDetector(
         onTap: () async {
-          print(path);
           await widget.audioCache.play("pie.mp4");
         },
         child: Container(
@@ -86,7 +86,7 @@ class _GestureImageState extends State<GestureImage> {
           height: widget.size == true
               ? MediaQuery.of(context).size.height * 0.2
               : MediaQuery.of(context).size.height * 0.3,
-          child:Image.asset(path,fit: BoxFit.cover,),
+          child:Image.asset(path == "images/""${thelocal.toString()}""/""${theposition.toString()}""/""$thetext"".png" ? path : path2,fit: BoxFit.cover,),
           ),
       ),
     );
