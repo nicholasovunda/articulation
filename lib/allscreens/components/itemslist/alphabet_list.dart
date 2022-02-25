@@ -10,8 +10,7 @@ Map dictionary = <String, dynamic>{
       "Boots",
       "Boy",
       "Bus",
-      "Beach ",
-      "ball",
+      "Beach ball",
     ],
     "median": [
       "Cheeseburger",

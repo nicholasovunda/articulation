@@ -1,3 +1,4 @@
+import 'package:articulation_studio/allscreens/components/itemslist/sentence_list.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

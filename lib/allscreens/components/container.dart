@@ -6,6 +6,8 @@ import 'package:articulation_studio/allscreens/animations/animated_circle_phrase
 import 'package:provider/provider.dart';
 import 'package:articulation_studio/provider/alphabet_provider.dart';
 
+import 'itemslist/sentence_list.dart';
+
 // This container contains the animated container for the home page, which contains letter and symbol for the sound inside the,
 // we have the showmodalwidget(slideuppanel) for navigating to a particular section of the app based on the sound, and the values are,
 // are passed down from the parent widget(this.container) it takes  an argument when called and passes down the value through the widget from the animated container

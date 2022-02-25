@@ -76,7 +76,67 @@ flutter:
     - images/b/final/
     - images/b/initial/
     - images/b/median/
+    - images/ch/final/
+    - images/ch/initial/
+    - images/ch/median/
+    - images/d/final/
+    - images/d/initial/
+    - images/d/median/
+    - images/f/final/
+    - images/f/initial/
+    - images/f/median/
+    - images/g/final/
+    - images/g/initial/
+    - images/g/median/
+    - images/h/initial/
+    - images/h/median/
+    - images/i/final/
+    - images/i/initial/
+    - images/i/median/
+    - images/j/final/
+    - images/j/initial/
+    - images/j/median/
+    - images/k/final/
+    - images/k/initial/
+    - images/k/median/
+    - images/l-/initial/
+    - images/m/final/
+    - images/m/initial/
+    - images/m/median/
+    - images/n/final/
+    - images/n/initial/
+    - images/n/median/
+    - images/p/final/
+    - images/p/initial/
+    - images/p/median/
+    - images/r/final/
+    - images/r/initial/
+    - images/r/median/
+    - images/r-/initial/
+    - images/s/final/
+    - images/s/initial/
+    - images/s/median/
 
+    - images/s-/initial/
+
+    - images/sh/final/
+    - images/sh/initial/
+    - images/sh/median/
+    - images/t/final/
+    - images/t/initial/
+    - images/t/median/
+    - images/v/final/
+    - images/v/initial/
+    - images/v/median/
+    - images/w/final/
+    - images/w/initial/
+    - images/w/median/
+    - images/y/final/
+    - images/y/initial/
+    - images/y/median/
+    - images/z/final/
+    - images/z/initial/
+    - images/z/median/
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg

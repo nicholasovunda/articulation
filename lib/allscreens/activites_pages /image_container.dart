@@ -1,4 +1,5 @@
 import 'package:articulation_studio/allscreens/components/itemslist/alphabet_list.dart';
+import 'package:articulation_studio/allscreens/components/itemslist/sentence_list.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:provider/provider.dart';
@@ -24,6 +25,10 @@ class ImageContainer extends StatefulWidget {
 class _ImageContainerState extends State<ImageContainer> {
   @override
   Widget build(BuildContext context) {
+    Map keys = dictionarySentence[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position];
+    var khiodj = keys.forEach((key, value) {
+      print(key);
+    });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -36,7 +41,7 @@ class _ImageContainerState extends State<ImageContainer> {
         const SizedBox(
           height: 10.0,
         ),
-        Text(dictionary[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][widget.index].toString()),
+        Text(dictionarySentence[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][khiodj].toString()),
       ],
     );
   }
