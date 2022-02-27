@@ -23,12 +23,13 @@ class ImageContainer extends StatefulWidget {
 }
 
 class _ImageContainerState extends State<ImageContainer> {
+
   @override
   Widget build(BuildContext context) {
     Map keys = dictionarySentence[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position];
-    var khiodj = keys.forEach((key, value) {
-      print(key);
-    });
+    var khiodj = keys.values.elementAt(widget.index);
+    var index  = keys.keys.toList()[widget.index];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -41,7 +42,9 @@ class _ImageContainerState extends State<ImageContainer> {
         const SizedBox(
           height: 10.0,
         ),
-        Text(dictionarySentence[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][khiodj].toString()),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.8,
+            child: Center(child: Text(dictionarySentence[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position][index].toString()))),
       ],
     );
   }

@@ -129,7 +129,7 @@ flutter:
     - images/v/initial/
     - images/v/median/
     - images/w/final/
-    - images/w/initial/
+#    - images/w/initial
     - images/w/median/
     - images/y/final/
     - images/y/initial/

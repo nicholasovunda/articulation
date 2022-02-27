@@ -38,7 +38,7 @@ Map dictionary = <String, dynamic>{
     ],
   },
   "ch": {
-    "initial": [
+    "median": [
       "Teacher",
       "Watching",
       "Picture",
@@ -50,7 +50,7 @@ Map dictionary = <String, dynamic>{
       "Wheelchair",
       "Nachos",
     ],
-    "median": [
+    "initial": [
       "Chair",
       "Chin",
       "Cheek",
@@ -206,11 +206,11 @@ Map dictionary = <String, dynamic>{
       "Grasshopper",
       "Broken Heart",
       "Behind",
-      "Birdhouse",
+      "Bird House",
       "Unhappy",
-      "Garden hose",
-      "Lighthouse",
-      "Hula hoop",
+      "Garden Hose",
+      "Light House",
+      "Hula Hoop",
       "Hedgehog",
       "Seahorse",
     ],
@@ -221,6 +221,43 @@ Map dictionary = <String, dynamic>{
     //   677,
     //   788,
     // ]
+  },
+  "i":{
+    "initial": [
+      "Ladybug",
+      "Lamb",
+      "Lamp",
+      "Leaf",
+      "Lemon",
+      "Lettuce",
+      "Lion",
+      "Lock",
+      "Lunch"
+    ],
+    "median":[
+      "Alligator",
+      "Dollar",
+      "Elephant",
+      "Family",
+      "Melon",
+      "Pillow",
+      "Police",
+      "Relaxing"
+      "Salad"
+      "Violin"
+    ],
+    "final":[
+      "Beach Ball",
+      "Bowl",
+      "Camel",
+      "Fall",
+      "Mail",
+      "Nail Polish",
+      "Owl",
+      "Pencil",
+      "Seal",
+      "Table"
+    ]
   },
   "j": {
     "initial": [
@@ -290,7 +327,7 @@ Map dictionary = <String, dynamic>{
       "Duck",
       "Lock",
       "Sick",
-      "Sock",
+      "Socks",
       "Think",
       "Beak",
       "Sink",
@@ -761,7 +798,7 @@ Map dictionary = <String, dynamic>{
       "Pizza",
       "Lasagna",
       "Crazy",
-      "Hazelnu"
+      "Hazelnut"
     ],
     "final": [
       "Cheese",

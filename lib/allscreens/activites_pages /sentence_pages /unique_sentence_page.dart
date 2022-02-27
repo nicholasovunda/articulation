@@ -293,7 +293,7 @@ class _UniquePageSentence  extends State<UniquePageSentence > {
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500),
-                          )
+                          ),
                         ],
                       ),
                     ),
