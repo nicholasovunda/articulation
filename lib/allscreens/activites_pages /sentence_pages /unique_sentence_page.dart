@@ -130,6 +130,7 @@ class _UniquePageSentence  extends State<UniquePageSentence > {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
+                            sentence: true,
                             audioCache: audioCache,
                             thesize: false,
                             index: pageNum,

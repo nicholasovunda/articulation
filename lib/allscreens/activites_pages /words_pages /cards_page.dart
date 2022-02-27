@@ -126,6 +126,7 @@ class _CardsPageState extends State<CardsPage> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
+                            sentence: false,
                             audioCache: audioCache, thesize: false,index: pageNum,
                           ),
 

@@ -138,17 +138,19 @@ void dispose(){
                         color: Colors.white,
                       ),
                       height: MediaQuery.of(context).size.height * 0.3,
-                      // width: MediaQuery.of(context).size.width * 0.9,
+                      width: MediaQuery.of(context).size.width * 0.9,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           ImageContainer(
+                            sentence: false,
                             audioCache: audioCache,
                             thesize: true,
                             index: pageNum * 2,
                           ),
                           ImageContainer(
+                            sentence: false,
                             audioCache: audioCache,
                             thesize: true,
                             index: imageIndex == 0 ? pageNum +1 : imageIndex,

@@ -129,6 +129,7 @@ class _UniquePagePhraseState extends State<UniquePagePhrase> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
+                            sentence: false,
                             audioCache: audioCache,
                             thesize: false,
                             index: pageNum,

@@ -129,6 +129,7 @@ class _RotatingMixedSentence extends State<RotatingMixedSentence> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
+                            sentence: true,
                             audioCache: audioCache,
                             thesize: false,
                             index: pageNum,

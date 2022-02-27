@@ -23,7 +23,7 @@ class _RotatingPageSentence extends State<RotatingPageSentence> {
   @override
   Widget build(BuildContext context) {
     Map? newLow =
-    Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
+        Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
     List newvalue = newLow[Provider.of<PositionProvider>(context).position];
     int extraindex = -2;
     return Material(
@@ -129,6 +129,7 @@ class _RotatingPageSentence extends State<RotatingPageSentence> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           ImageContainer(
+                            sentence: true,
                             audioCache: audioCache,
                             thesize: false,
                             index: pageNum,

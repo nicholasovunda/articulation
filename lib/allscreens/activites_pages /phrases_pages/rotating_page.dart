@@ -1,5 +1,10 @@
+import 'dart:async';
+import 'dart:math';
+
+import 'package:articulation_studio/allscreens/activites_pages%20/image_container_random.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../provider/alphabet_provider.dart';
@@ -20,12 +25,13 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
 
   PageController pageController = PageController();
   int pageNum = 0;
+  int pageValue = 0;
+  int keyindex = 0;
   @override
   Widget build(BuildContext context) {
     Map? newLow =
-    Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
-    List newvalue = newLow[Provider.of<PositionProvider>(context).position];
-    int extraindex = -2;
+        Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
+    List forValue = newLow[Provider.of<PositionProvider>(context,listen: false).position];
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
@@ -103,41 +109,124 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
               height: 35,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0),
+              padding: const EdgeInsets.symmetric(horizontal: 4.0, ),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.51,
-                child: PageView.builder(
-                  controller: pageController,
-                  onPageChanged: (num) {
-                    setState(() {
-                      pageNum = num;
-                    });
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    extraindex += 2;
-                    return Container(
-                      margin: const EdgeInsets.all(5),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50),
-                        color: Colors.white,
-                      ),
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      // width: MediaQuery.of(context).size.width * 0.9,
-                      child: Row(
+                child: Container(
+                  margin: const EdgeInsets.all(1),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(50),
+                    color: Colors.white,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ImageContainer(
-                            audioCache: audioCache,
-                            thesize: false,
-                            index: pageNum,
+                          Text(
+                            "Lead word",
+                            style: GoogleFonts.inter(
+                                color: Colors.black38,
+                                fontWeight: FontWeight.w600),
                           ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          ImageContainerRandom(
+                            keyindex: keyindex,
+                            sentence: false,
+                            audioCache: audioCache,
+                            thesize: true,
+                            index: pageValue,
+                          ),
+                          const SizedBox(
+                            height: 25.0,
+                          ),
+                          TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                              padding: const EdgeInsets.all(30),
+                              shape: const CircleBorder(),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                int num = Random().nextInt(dictionary.keys.length - 1);
+                                keyindex = num;
+                                Timer(Duration(seconds: 1),() {
+                                  List numbers = dictionary[keyindex][Provider.of<PositionProvider>(context, listen: false).position];
+                                  int num2 = Random().nextInt(numbers.length - 1);
+                                  pageValue = num2;
+                                });
+                              });
+                            },
+                            child: Text(
+                              "Spin",
+                              style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          )
                         ],
                       ),
-                    );
-                  },
-                  itemCount: newvalue.length,
+                      const SizedBox(
+                        width: 2.0,
+                        child: Divider(
+                          color: Colors.black26,
+                          thickness: 2.0,
+                        ),
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Target word",
+                            style: GoogleFonts.inter(
+                                color: Colors.black38,
+                                fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(
+                            height: 10.0,
+                          ),
+                          ImageContainer(
+
+                            sentence: false,
+                            audioCache: audioCache,
+                            thesize: true,
+                            index: pageNum,
+                          ),
+                          const SizedBox(
+                            height: 25.0,
+                          ),
+                          TextButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.red,
+                              padding: const EdgeInsets.all(30),
+                              shape: const CircleBorder(),
+                            ),
+                            onPressed: () {
+                              setState(() {
+                              pageNum = Random().nextInt(forValue.length - 1);
+                              });
+                            },
+                            child: Text(
+                              "Spin",
+                              style: GoogleFonts.inter(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
