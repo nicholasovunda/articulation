@@ -137,13 +137,13 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                           const SizedBox(
                             height: 10.0,
                           ),
-                          ImageContainerRandom(
-                            keyindex: keyindex,
-                            sentence: false,
-                            audioCache: audioCache,
-                            thesize: true,
-                            index: pageValue,
-                          ),
+                          // ImageContainerRandom(
+                          //   keyindex: keyindex,
+                          //   sentence: false,
+                          //   audioCache: audioCache,
+                          //   thesize: true,
+                          //   index: pageValue,
+                          // ),
                           const SizedBox(
                             height: 25.0,
                           ),
@@ -157,7 +157,7 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                               setState(() {
                                 int num = Random().nextInt(dictionary.keys.length - 1);
                                 keyindex = num;
-                                Timer(Duration(seconds: 1),() {
+                                Timer(const Duration(seconds: 1),() {
                                   List numbers = dictionary[keyindex][Provider.of<PositionProvider>(context, listen: false).position];
                                   int num2 = Random().nextInt(numbers.length - 1);
                                   pageValue = num2;

@@ -1,11 +1,9 @@
-import 'dart:math';
 
 import 'package:articulation_studio/allscreens/components/itemslist/alphabet_list.dart';
 import 'package:articulation_studio/allscreens/components/itemslist/sentence_list.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:provider/provider.dart';
-
 import '../../provider/alphabet_provider.dart';
 
 class ImageContainerRandom extends StatefulWidget {
@@ -32,10 +30,10 @@ class _ImageContainerRandomState extends State<ImageContainerRandom> {
   @override
   Widget build(BuildContext context) {
     Map keys = dictionarySentence[Provider.of<AlphabetProvider>(context).word]
-    [Provider.of<PositionProvider>(context).position];
-    var khiodj = keys.values.elementAt(widget.index);
-    var index = keys.keys.toList()[widget.index];
-    var thelocal = dictionary.keys.elementAt(widget.keyindex);
+        [Provider.of<PositionProvider>(context).position];
+    // var khiodj = keys.values.elementAt(widget.index);
+    int index = keys.keys.toList()[widget.index];
+    int thelocal = dictionary.keys.elementAt(widget.keyindex);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -53,13 +51,19 @@ class _ImageContainerRandomState extends State<ImageContainerRandom> {
         SizedBox(
           width: widget.sentence == true
               ? MediaQuery.of(context).size.width * 0.8
-              :MediaQuery.of(context).size.width * 0.4,
+              : MediaQuery.of(context).size.width * 0.4,
           child: Center(
-            child: Text( widget.sentence == true
-                ? dictionarySentence[Provider.of<AlphabetProvider>(context).word]
-            [Provider.of<PositionProvider>(context).position][index]
-                .toString()
-                : dictionary[thelocal][Provider.of<PositionProvider>(context).position][widget.index].toString(),
+            child: Text(
+              widget.sentence == true
+                  ? dictionarySentence[
+                                  Provider.of<AlphabetProvider>(context).word]
+                              [Provider.of<PositionProvider>(context).position]
+                          [index]
+                      .toString()
+                  : dictionary[thelocal]
+                              [Provider.of<PositionProvider>(context).position]
+                          [widget.index]
+                      .toString(),
               style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
             ),
           ),
@@ -95,7 +99,8 @@ class _GestureImageState extends State<GestureImage> {
     var thelocal = dictionary.keys.elementAt(widget.keysindex);
     var theposition = Provider.of<PositionProvider>(context).position;
     String thetext = dictionary[thelocal]
-    [Provider.of<PositionProvider>(context).position][widget.index]
+                [Provider.of<PositionProvider>(context).position][widget.index]
+            [Provider.of<PositionProvider>(context).position][widget.index]
         .toString();
     var path = "images/"
         "${thelocal.toString()}"
@@ -112,29 +117,35 @@ class _GestureImageState extends State<GestureImage> {
         "$thetext"
         ".jpg";
     return Container(
-      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.black26),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12), color: Colors.black26),
       child: GestureDetector(
         onTap: () async {
           await widget.audioCache.play("pie.mp4");
         },
         child: Container(
-            margin: const EdgeInsets.symmetric(horizontal: 1),
-            constraints: widget.size == true
-                ? BoxConstraints(
-                maxWidth: MediaQuery.of(context).size.width * 0.47,
-                maxHeight: MediaQuery.of(context).size.height * 0.6) : null,
-            width: widget.size == true ? MediaQuery.of(context).size.width * 0.47 : MediaQuery.of(context).size.width * 0.9,
-            height: widget.size == true ? MediaQuery.of(context).size.height * 0.2 : MediaQuery.of(context).size.height * 0.3,
-            child:  Image.asset(
-              "images/"
-                  "${thelocal.toString()}"
-                  "/"
-                  "${theposition.toString()}"
-                  "/"
-                  "$thetext"
-                  ".png",
-              fit: BoxFit.cover,
-            )
+          margin: const EdgeInsets.symmetric(horizontal: 1),
+          constraints: widget.size == true
+              ? BoxConstraints(
+                  maxWidth: MediaQuery.of(context).size.width * 0.47,
+                  maxHeight: MediaQuery.of(context).size.height * 0.6)
+              : null,
+          width: widget.size == true
+              ? MediaQuery.of(context).size.width * 0.47
+              : MediaQuery.of(context).size.width * 0.9,
+          height: widget.size == true
+              ? MediaQuery.of(context).size.height * 0.2
+              : MediaQuery.of(context).size.height * 0.3,
+          child: Image.asset(
+            "images/"
+            "${thelocal.toString()}"
+            "/"
+            "${theposition.toString()}"
+            "/"
+            "$thetext"
+            ".png",
+            fit: BoxFit.cover,
+          ),
         ),
       ),
     );
