@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:articulation_studio/AllScreens/custom_words/custom_words.dart';
 import 'package:articulation_studio/AllScreens/components/image_widget.dart';
+import 'package:articulation_studio/allscreens/components/itemslist/alphabet_list.dart';
+import 'package:articulation_studio/allscreens/components/wordselection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -9,6 +11,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import '../custom_words/syllabus.dart';
+import 'package:record/record.dart';
 
 // this class stores custom words images and sentence by the users
 
@@ -19,7 +22,9 @@ class AddWordWidget extends StatefulWidget {
   @override
   _AddWordWidgetState createState() => _AddWordWidgetState();
 }
+
 class _AddWordWidgetState extends State<AddWordWidget> {
+
   File? image;
   Future pickImage(ImageSource source) async {
     try {
@@ -39,7 +44,23 @@ class _AddWordWidgetState extends State<AddWordWidget> {
     final image = File('${directory.path}/$name');
     return File(imagePath).copy(image.path);
   }
+
 //TODO implement the audio player and record plugin
+  ScrollController controller = ScrollController();
+  TextEditingController wordController = TextEditingController();
+  TextEditingController sentenceController = TextEditingController();
+  TextEditingController phraseController = TextEditingController();
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    controller.dispose();
+    wordController.dispose();
+    sentenceController.dispose();
+    phraseController.dispose();
+    // _audioplayer.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         backgroundColor: Colors.white,
@@ -51,7 +72,10 @@ class _AddWordWidgetState extends State<AddWordWidget> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                BelowButton(text: "Add word",color: Colors.blue,textcolor: Colors.white,
+                BelowButton(
+                  text: "Add word",
+                  color: Colors.blue,
+                  textcolor: Colors.white,
                 ),
                 const BelowButtonBack(),
               ],
@@ -59,64 +83,123 @@ class _AddWordWidgetState extends State<AddWordWidget> {
           )
         ],
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: ListView(
-            controller: widget.controller,
             children: [
-            image != null ? ImageWidget(image: image!, onClicked:(source) =>pickImage(source)): const Image(image:  AssetImage('images/logo.png',),height: 70, width: 70,),
-              TextButton(onPressed: (){
-               pickImage(ImageSource.gallery);
-              }, child: const Text('Click')),
-              CustomRow(
-                text: "Enter word",
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              Row(
+              Column(
+                // controller: widget.controller,d
                 children: [
-                  Text(
-                    "Syllabus:",
-                    style: GoogleFonts.inter(color: Colors.black),
+                  image != null
+                      ? ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                        clipBehavior: Clip.hardEdge,
+                        child: ImageWidget(
+                            image: image!,
+                            onClicked: (source) => pickImage(source)),
+                      )
+                      : ClipRRect(
+                    borderRadius: BorderRadius.circular(12),
+                        child: const Image(
+                            image: AssetImage(
+                              'images/logo.png',
+                            ),
+                            height: 70,
+                            width: 70,
+                          ),
+                      ),
+                  TextButton(
+                      onPressed: () {
+                        pickImage(ImageSource.gallery);
+                      },
+                      child: const Text('Add image')),
+                  CustomRow(
+                    controller: wordController,
+                    text: "Enter word",
+                  ),
+                  const SizedBox(
+                    height: 10.0,
                   ),
                   Row(
                     children: [
-                      SyllablesSelection(
-                        text: "1",
+                      Text(
+                        "Syllabus:",
+                        style: GoogleFonts.inter(color: Colors.black),
                       ),
-                      SyllablesSelection(text: "2"),
-                      SyllablesSelection(text: "3"),
-                      SyllablesSelection(text: "4+"),
+                      Row(
+                        children: [
+                          SyllablesSelection(
+                            text: "1",
+                          ),
+                          SyllablesSelection(text: "2"),
+                          SyllablesSelection(text: "3"),
+                          SyllablesSelection(text: "4+"),
+                        ],
+                      )
                     ],
-                  )
+                  ),
+                  const SizedBox(
+                    height: 10.0,
+                  ),
+                  CustomRow(
+                    controller: sentenceController,
+                    text: "Enter Sentence",
+                  ),
+                  const SizedBox(
+                    height: 15.0,
+                  ),
+                  CustomRow(
+                    controller: phraseController,
+                    text: "Enter phrase",
+                  ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
+                  Text(
+                    "Select Sound to save to:",
+                    style: GoogleFonts.inter(
+                        fontSize: 15.0, fontWeight: FontWeight.w500),
+                  ),
                 ],
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              CustomRow(
-                text: "Enter word",
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-              CustomRow(
-                text: "Enter word",
               ),
               const SizedBox(
                 height: 20.0,
               ),
-              const Text("Select Sound to save to:"),
+              GridView.count(
+                  controller: controller,
+                  shrinkWrap: true,
+                  crossAxisCount: 4,
+                  mainAxisSpacing: 10.0,
+                  crossAxisSpacing: 10.0,
+                  children: List.generate(
+                    dictionary.keys.length,
+                    (index) => GestureDetector(
+                      onTap: () => WordSelection(
+                        position: index,
+                        onTap: true,
+                      ),
+                      child: WordSelection(
+                        position: index,
+                        onTap: false,
+                      ),
+                    ),
+                  )),
+              const SizedBox(
+                height: 50,
+              )
             ],
           ),
+
+          // ListView.builder(itemBuilder:(content int))
         ),
       );
 }
 
-
 class CustomRow extends StatefulWidget {
+  TextEditingController controller;
+
   String? text;
   CustomRow({
+    required this.controller,
     required this.text,
     Key? key,
   }) : super(key: key);
@@ -126,6 +209,15 @@ class CustomRow extends StatefulWidget {
 }
 
 class _CustomRowState extends State<CustomRow> {
+  final _audioplayer = Record();
+  @override
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _audioplayer.dispose();
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -133,17 +225,20 @@ class _CustomRowState extends State<CustomRow> {
       children: [
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.06,
-          width: MediaQuery.of(context).size.width * 0.7,
-          child:  TextField(
+          width: MediaQuery.of(context).size.width * 0.75,
+          child: TextField(
+            controller: widget.controller,
             decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-                labelText: "Enter email address",
-                labelStyle: GoogleFonts.inter(color: Colors.black54,fontWeight: FontWeight.w500, fontSize: 15),
-                filled: true,
-                fillColor: Colors.grey.shade300,
+                contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 10.0, vertical: 20.0),
+                labelText: widget.text,
+                labelStyle: GoogleFonts.inter(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 14),
+                // fillColor: Colors.grey.shade300,
                 border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none
+                  borderRadius: BorderRadius.circular(10),
                 )),
           ),
         ),
@@ -153,12 +248,32 @@ class _CustomRowState extends State<CustomRow> {
         GestureDetector(
           onTap: () {},
           child: CircleAvatar(
-            radius: MediaQuery.of(context).size.width * 0.05,
-            child: const Icon(Icons.mic),
+            backgroundColor: Colors.blue.shade400,
+            radius: MediaQuery.of(context).size.width * 0.055,
+            child: GestureDetector(
+              onTap: () {
+                setState(() async {
+                  await _audioplayer.start(
+                    path: "assets/newfile.m4a",
+                    encoder: AudioEncoder.AAC,
+                    bitRate: 128000,
+                    samplingRate: 44100,
+                  );
+                });
+              },
+              // onTapCancel: ()async{
+              //   await _audioplayer.stop();
+              // },
+              child: _audioplayer.start() == true ? Icon(
+                Icons.mic,
+                color: Colors.white,
+              ) : Icon(
+                Icons.add,color: Colors.red,
+              )
+            ),
           ),
         )
       ],
     );
   }
-
 }

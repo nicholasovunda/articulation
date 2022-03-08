@@ -13,9 +13,8 @@ class AlphabetProvider with ChangeNotifier, DiagnosticableTreeMixin{
 
 class PositionProvider with ChangeNotifier,DiagnosticableTreeMixin{
   String? _position;
-  set AssignPosition(wordv){
+  set AssignPosition(wordv) {
     return _position = wordv;
   }
   String get position => _position!;
-
 }

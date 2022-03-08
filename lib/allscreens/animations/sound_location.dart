@@ -28,7 +28,7 @@ class _SoundLocationState extends State<SoundLocation> {
 
   @override
   Widget build(BuildContext context) {
-    // Map? newLow = Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
+    Map? newLow = Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
     return ListView(
       controller: widget.controller,
       children: <Widget>[

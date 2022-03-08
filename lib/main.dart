@@ -18,10 +18,17 @@ import 'provider/alphabet_provider.dart';
 
 void main() {
   runApp(
-    MultiProvider(providers: [
-      ChangeNotifierProvider(create: (_) => AlphabetProvider()),
-      ChangeNotifierProvider(create: (_) => PositionProvider()),
-    ], child: MyApp()),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => AlphabetProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => PositionProvider(),
+        ),
+      ],
+      child: MyApp(),
+    ),
   );
 }
 // TODO disposee animations and frame rate at thee start of the project

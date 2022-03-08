@@ -16,11 +16,14 @@ class _SyllablesSelectionState extends State<SyllablesSelection> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      child: CircleAvatar(
-        backgroundColor: Colors.white,
-        child: Text(
-          widget.text!,
-          style: GoogleFonts.inter(fontSize: 12),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: CircleAvatar(
+          backgroundColor: Colors.grey.shade200,
+          child: Text(
+            widget.text!,
+            style: GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w600, color: Colors.black54),
+          ),
         ),
       ),
     );

@@ -21,7 +21,7 @@ class RotatingPagePhrase extends StatefulWidget {
 class _RotatingPagePhrase extends State<RotatingPagePhrase> {
   AudioPlayer audioPlayer = AudioPlayer();
   AudioCache audioCache = AudioCache();
-// late PageController _pageController;
+  late PageController _pageController;
 
   PageController pageController = PageController();
   int pageNum = 0;
@@ -31,7 +31,8 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
   Widget build(BuildContext context) {
     Map? newLow =
         Map.from(dictionary[Provider.of<AlphabetProvider>(context).word]);
-    List forValue = newLow[Provider.of<PositionProvider>(context,listen: false).position];
+    List forValue =
+        newLow[Provider.of<PositionProvider>(context, listen: false).position];
     return Material(
       child: Container(
         width: MediaQuery.of(context).size.width * 0.9,
@@ -82,10 +83,12 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                   height: 32.0,
                   width: 90.0,
                   decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          bottomLeft: Radius.circular(20.0))),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      bottomLeft: Radius.circular(20.0),
+                    ),
+                  ),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -109,7 +112,9 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
               height: 35,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4.0, ),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 4.0,
+              ),
               child: SizedBox(
                 height: MediaQuery.of(context).size.height * 0.51,
                 child: Container(
@@ -137,13 +142,13 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                           const SizedBox(
                             height: 10.0,
                           ),
-                          // ImageContainerRandom(
-                          //   keyindex: keyindex,
-                          //   sentence: false,
-                          //   audioCache: audioCache,
-                          //   thesize: true,
-                          //   index: pageValue,
-                          // ),
+                          ImageContainer(
+                            // keyindex: keyindex,
+                            sentence: false,
+                            audioCache: audioCache,
+                            thesize: true,
+                            index: pageValue,
+                          ),
                           const SizedBox(
                             height: 25.0,
                           ),
@@ -155,11 +160,16 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                             ),
                             onPressed: () {
                               setState(() {
-                                int num = Random().nextInt(dictionary.keys.length - 1);
+                                int num = Random()
+                                    .nextInt(dictionary.keys.length - 1);
                                 keyindex = num;
-                                Timer(const Duration(seconds: 1),() {
-                                  List numbers = dictionary[keyindex][Provider.of<PositionProvider>(context, listen: false).position];
-                                  int num2 = Random().nextInt(numbers.length - 1);
+                                Timer(const Duration(seconds: 1), () {
+                                  List numbers = dictionary.keys.elementAt(keyindex)[
+                                      Provider.of<PositionProvider>(context,
+                                              listen: false)
+                                          .position];
+                                  int num2 =
+                                      Random().nextInt(numbers.length - 1);
                                   pageValue = num2;
                                 });
                               });
@@ -195,7 +205,6 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                             height: 10.0,
                           ),
                           ImageContainer(
-
                             sentence: false,
                             audioCache: audioCache,
                             thesize: true,
@@ -212,7 +221,7 @@ class _RotatingPagePhrase extends State<RotatingPagePhrase> {
                             ),
                             onPressed: () {
                               setState(() {
-                              pageNum = Random().nextInt(forValue.length - 1);
+                                pageNum = Random().nextInt(forValue.length - 1);
                               });
                             },
                             child: Text(

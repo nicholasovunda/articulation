@@ -27,9 +27,8 @@ class ImageContainer extends StatefulWidget {
 class _ImageContainerState extends State<ImageContainer> {
   @override
   Widget build(BuildContext context) {
-    Map keys = dictionarySentence[Provider.of<AlphabetProvider>(context).word]
-        [Provider.of<PositionProvider>(context).position];
-    var khiodj = keys.values.elementAt(widget.index);
+    Map keys = dictionarySentence[Provider.of<AlphabetProvider>(context).word][Provider.of<PositionProvider>(context).position];
+    // var khiodj = keys.values.elementAt(widget.index);
     var index = keys.keys.toList()[widget.index];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -90,20 +89,20 @@ class _GestureImageState extends State<GestureImage> {
         .toString();
     var thelocal = Provider.of<AlphabetProvider>(context).word;
     var theposition = Provider.of<PositionProvider>(context).position;
-    var path = "images/"
-        "${thelocal.toString()}"
-        "/"
-        "${theposition.toString()}"
-        "/"
-        "$thetext"
-        ".png";
-    var path2 = "images/"
-        "${thelocal.toString()}"
-        "/"
-        "${theposition.toString()}"
-        "/"
-        "$thetext"
-        ".jpg";
+    // var path = "images/"
+    //     "${thelocal.toString()}"
+    //     "/"
+    //     "${theposition.toString()}"
+    //     "/"
+    //     "$thetext"
+    //     ".png";
+    // var path2 = "images/"
+    //     "${thelocal.toString()}"
+    //     "/"
+    //     "${theposition.toString()}"
+    //     "/"
+    //     "$thetext"
+    //     ".jpg";
       return Container(
         decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: Colors.black26),
         child: GestureDetector(
