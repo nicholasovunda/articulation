@@ -1,0 +1,82 @@
+{
+  "project_info": {
+    "project_number": "904449200684",
+    "project_id": "call-speech-50a6f",
+    "storage_bucket": "call-speech-50a6f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904449200684:android:ebdda5e1e619a46ae27789",
+        "android_client_info": {
+          "package_name": "com.example.articulationStudio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904449200684-ft14e54bh5p1c288hgp6d8qkf71uosol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdlU8n6HOAKL8a0oz_8vhBiIb45mVzvUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904449200684-ft14e54bh5p1c288hgp6d8qkf71uosol.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "904449200684-ae9dtl6onettu56421n6ge0kn3a1k0fr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.articulationStudio"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904449200684:android:15a2b3519d364785e27789",
+        "android_client_info": {
+          "package_name": "com.outlicorp.callspeech"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904449200684-ft14e54bh5p1c288hgp6d8qkf71uosol.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdlU8n6HOAKL8a0oz_8vhBiIb45mVzvUY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904449200684-ft14e54bh5p1c288hgp6d8qkf71uosol.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "904449200684-ae9dtl6onettu56421n6ge0kn3a1k0fr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.articulationStudio"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

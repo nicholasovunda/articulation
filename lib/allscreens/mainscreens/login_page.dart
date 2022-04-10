@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -12,6 +13,14 @@ class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final password = TextEditingController();
   Color primaryColor = const Color(0xFF00A7E1);
+
+  @override
+  void dispose(){
+    email.dispose();
+    password.dispose();
+
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -95,15 +104,31 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(25),),
                   ),
                   child: Text("Sign In", style: GoogleFonts.inter(fontWeight: FontWeight.w700, color: Colors.white, fontSize: 15),),
-                  onPressed: (){
-                    Navigator.pushNamedAndRemoveUntil(context, "/homepage", (route) => false);
-                  },
+                  onPressed: signIn,
                 ),
-              )
+              ),
+              const SizedBox(height: 10.0,),
+              Padding(
+                padding:  EdgeInsets.symmetric( horizontal: MediaQuery.of(context).size.width * 0.05),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: GestureDetector(
+                      onTap: (){
+                        Navigator.pushNamedAndRemoveUntil(context, "/registration", (route) => true);
+                      },
+                      child: Text("New User", style: GoogleFonts.lato(fontWeight: FontWeight.w600, color: Colors.black87),)),),
+              ),
             ],
           ),
         ),
       ),
     ),
   );
+
+  Future signIn() async {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email.text.trim(),
+      password: password.text.trim(),
+    );
+  }
 }

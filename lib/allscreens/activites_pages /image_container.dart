@@ -117,7 +117,7 @@ class _GestureImageState extends State<GestureImage> {
                 maxHeight: MediaQuery.of(context).size.height * 0.6) : null,
             width: widget.size == true ? MediaQuery.of(context).size.width * 0.47 : MediaQuery.of(context).size.width * 0.9,
             height: widget.size == true ? MediaQuery.of(context).size.height * 0.2 : MediaQuery.of(context).size.height * 0.3,
-            child:  Image.asset(
+            child: Image.asset(
                   "images/"
                       "${thelocal.toString()}"
                       "/"

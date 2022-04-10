@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:articulation_studio/AllScreens/custom_words/custom_words.dart';
 import 'package:articulation_studio/AllScreens/components/image_widget.dart';
 import 'package:articulation_studio/allscreens/components/itemslist/alphabet_list.dart';
+import 'package:articulation_studio/allscreens/components/itemslist/sound_recorder.dart';
 import 'package:articulation_studio/allscreens/components/wordselection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -11,7 +12,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:path/path.dart';
 import '../custom_words/syllabus.dart';
-import 'package:record/record.dart';
+// import 'package:record/record.dart';
+// import 'package:sound'
 
 // this class stores custom words images and sentence by the users
 
@@ -209,17 +211,27 @@ class CustomRow extends StatefulWidget {
 }
 
 class _CustomRowState extends State<CustomRow> {
-  final _audioplayer = Record();
+  final recorder = SoundRecorder();
+  // final _audioplayer = Record();
   @override
+  void initState(){
+    super.initState();
+    recorder.init();
+  }
 
   @override
   void dispose() {
     // TODO: implement dispose
-    _audioplayer.dispose();
+    recorder.dispose();
     super.dispose();
   }
   @override
+
   Widget build(BuildContext context) {
+    final isRecording = recorder.isRecording;
+    final icons = isRecording ? Icons.stop : Icons.mic;
+    final primary = isRecording ? Colors.red : Colors.white;
+    final onPrimary = isRecording ? Colors.white :Colors.blue.shade400;
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
@@ -246,30 +258,15 @@ class _CustomRowState extends State<CustomRow> {
           width: 10.0,
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () async {
+           Future isRecording = await recorder.toggleRecorder();
+          setState(() {});
+          },
           child: CircleAvatar(
-            backgroundColor: Colors.blue.shade400,
+            backgroundColor: onPrimary,
             radius: MediaQuery.of(context).size.width * 0.055,
-            child: GestureDetector(
-              onTap: () {
-                setState(() async {
-                  await _audioplayer.start(
-                    path: "assets/newfile.m4a",
-                    encoder: AudioEncoder.AAC,
-                    bitRate: 128000,
-                    samplingRate: 44100,
-                  );
-                });
-              },
-              // onTapCancel: ()async{
-              //   await _audioplayer.stop();
-              // },
-              child: _audioplayer.start() == true ? Icon(
-                Icons.mic,
-                color: Colors.white,
-              ) : Icon(
-                Icons.add,color: Colors.red,
-              )
+            child: Icon(
+              icons, color: primary,
             ),
           ),
         )

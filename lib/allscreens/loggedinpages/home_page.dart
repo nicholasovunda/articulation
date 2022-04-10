@@ -4,6 +4,8 @@ import 'package:articulation_studio/AllScreens/components/custom_circle_about.da
 import 'package:articulation_studio/AllScreens/components/row_factor.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'dart:io';
+
 
 import '../components/itemslist/row_list.dart';
 
@@ -98,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                     addAutomaticKeepAlives: false,
                     addRepaintBoundaries: false,
                     separatorBuilder: (context, index) => SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.00001,
+                      height: Platform.isAndroid? MediaQuery.of(context).size.height * 0.02 : MediaQuery.of(context).size.height * 0.00001,
                     ),
                     itemBuilder: (context, index) => HomeRowWidget(
                         firstMainText: newRow[index].firstMainText,
